@@ -115,7 +115,7 @@ def build_model_dict(data_file: str = 'data.parquet') -> Dict:
             )
 
             # Initialize model builder
-            model_builder = ModelClass(max_lag=1)  # Minimal lag
+            model_builder = ModelClass(max_lag=2)  # 2 lags
 
             # Fit model
             fitted_model = model_builder.fit(y_train=y_train, X_train=X_train)
