@@ -100,11 +100,11 @@ def build_model_dict(data_file: str = 'data.parquet') -> Dict:
             continue
 
         # Add random subset of other variables
-        exog_other = [var for var in RANDOM_EXOG_SUBSET
-                      if var in data.columns and var != endog and var not in exog_primary]
+        # exog_other = [var for var in RANDOM_EXOG_SUBSET
+        #               if var in data.columns and var != endog and var not in exog_primary]
 
-        # Combine all exogenous variables
-        all_exog = exog_primary + exog_other
+        # Combine all exogenous variables - use only primary for simplicity
+        all_exog = exog_primary  # + exog_other
 
         # Prepare data
         try:
