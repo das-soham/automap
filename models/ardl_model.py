@@ -55,7 +55,7 @@ class ARDLModel(BaseTimeSeriesModel):
                 lags=self.max_lag,  # Lags for endogenous
                 exog=X_train,
                 order=self.max_lag,  # Lags for exogenous (same for all)
-                trend='c'  # Include constant
+                trend='n'  # No trend/constant
             )
             fitted_model = model.fit()
 
