@@ -74,7 +74,6 @@ def create_gpr_composite(
 
     # Extract GPR columns
     gpr_cols = [col for col in data.columns if col in GDP_WEIGHTS]
-    non_gpr_cols = [col for col in data.columns if col not in GDP_WEIGHTS]
     gpr_data = data[gpr_cols]
 
     logger.info(f"Found {len(gpr_cols)} GPR series: {gpr_cols}")
@@ -92,7 +91,6 @@ def create_gpr_composite(
 
     # Save to Parquet
     if output_file:
-        data = data[non_gpr_cols]
         data['GPR_EU'] = composite
         data.to_parquet(output_file)
         logger.info(f"Saved composite to {output_file}")

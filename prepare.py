@@ -156,7 +156,7 @@ def evaluate_single_model(
 
 def evaluate_model_dict(
     model_dict: Dict,
-    data_file: str = 'data.parquet',
+    data_file: str = 'data_gpr.parquet',
     test_start: str = TEST_START_DT,
     test_end: str = TEST_END_DT
 ) -> Tuple[float, pd.DataFrame]:
@@ -199,12 +199,12 @@ def evaluate_model_dict(
             'endogenous': model_info['endogenous'],
             'exogenous_vars': exog_formatted,
             'n_exog': model_info['n_exog'],
-            'rmse': rmse,
+            'rmse': rmse if rmse is not np.nan else 100.0,
             'n_predictions': n_pred
         })
 
     results_df = pd.DataFrame(results)
-    total_rmse = results_df['rmse'].sum()
+    total_rmse = results_df['rmse'].fillna(100.0).sum()
 
     # Log detailed evaluation summary for grep-ability
     log_evaluation_summary(results_df, total_rmse)
